@@ -1,13 +1,45 @@
-var http = require('http');
+const http = require('http');
+const fs = require('fs');
 
 http
   .createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    console.log(
-      `Connected at: ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
-    );
-    res.end(
-      `Hello ${new Date().getHours()}:${new Date().getMinutes()}`
-    );
+    console.log(req.method);
+    console.log(req.url);
+
+    let path = './';
+    switch (req.url) {
+      case '/':
+        path += 'index.html';
+        res.statusCode = 200;
+        break;
+      case '/about':
+        path += 'about.html';
+        res.statusCode = 200;
+        break;
+      case '/contact':
+        path += 'contact-me.html';
+        res.statusCode = 200;
+        break;
+      case '/styles.css':
+        path += 'styles.css';
+        res.statusCode = 200;
+        break;
+      case '/favicon.ico':
+        path += 'favicon.ico';
+        res.statusCode = 200;
+        break;
+      default:
+        path += '404.html';
+        res.statusCode = 404;
+    }
+
+    fs.readFile(path, (err, data) => {
+      if (err) {
+        console.log(err);
+        res.end();
+      } else {
+        res.end(data);
+      }
+    });
   })
   .listen(8080);
