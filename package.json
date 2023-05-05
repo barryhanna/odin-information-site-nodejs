@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/barryhanna/odin-information-site-nodejs/issues"
   },
-  "homepage": "https://github.com/barryhanna/odin-information-site-nodejs#readme"
+  "homepage": "https://github.com/barryhanna/odin-information-site-nodejs#readme",
+  "dependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
